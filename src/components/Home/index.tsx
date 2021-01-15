@@ -1,5 +1,5 @@
 import { Button, Grid } from "@material-ui/core";
-import { Dispatch, useReducer, useState } from "react";
+import { Dispatch, useReducer } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootStore } from "../../store";
 import ArticleCard from "../../utils/ArticleCard";
@@ -23,16 +23,15 @@ const homeReducer = (state: InitialSort, action: Dispatch<GetArticles>) => {
 };
 
 const Home: React.FC<HomeProps> = () => {
-  const [sort, setSort] = useReducer(homeReducer, initialSort);
+  const [sort] = useReducer(homeReducer, initialSort);
   const articles = useSelector((state: RootStore) => state.articles);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (!Object.keys(articles).length && !articles.articles) {
-      dispatch(getArticles(initialSort));
+      dispatch(getArticles(sort));
     }
-  }, [dispatch, articles]);
-  console.log(articles);
+  }, [dispatch, articles, sort]);
   return (
     <div>
       <div>CARROUSEL</div>
@@ -41,7 +40,14 @@ const Home: React.FC<HomeProps> = () => {
         <Grid item container spacing={2} sm={10} lg={8}>
           {Object.keys(articles).length &&
             articles.articles.map((article: ArticleT, index: number) => (
-              <Grid item sm={6} lg={4} alignItems="center" container>
+              <Grid
+                key={article._id}
+                item
+                sm={6}
+                lg={4}
+                alignItems="center"
+                container
+              >
                 <Grid item>
                   <ArticleCard article={article} key={article._id} />
                 </Grid>

@@ -1,5 +1,4 @@
 import { Link as RouterLink } from "react-router-dom";
-import React, { useEffect } from "react";
 import {
   Card,
   CardMedia,
@@ -17,7 +16,7 @@ export interface ArticleCardProps {
 }
 
 const ArticleCard: React.FC<ArticleCardProps> = ({ article }) => {
-  const { title, date, status, content, score, director, _id, excerpt } = article;
+  const { title, _id, excerpt } = article;
   return (
     <Card>
       <CardMedia
