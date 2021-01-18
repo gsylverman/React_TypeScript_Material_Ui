@@ -35,7 +35,7 @@ const Home: React.FC<HomeProps> = () => {
   return (
     <div>
       <div>CARROUSEL</div>
-      <Grid container xs={12}>
+      <Grid container>
         <Grid item container sm={1} lg={2} />
         <Grid item container spacing={2} sm={10} lg={8}>
           {Object.keys(articles).length &&

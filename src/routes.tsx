@@ -1,6 +1,7 @@
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import GoogleFontLoader from "react-google-font-loader";
 import { Grid } from "@material-ui/core";
+import Auth from "./components/Auth";
 import Home from "./components/Home";
 import Contact from "./components/Contact";
 import Header from "./components/Navigation/Header";
@@ -13,6 +14,7 @@ function Routes() {
         <Header />
         <Grid item container>
           <Switch>
+            <Route path="/auth" component={Auth} />
             <Route path="/contact" component={Contact} />
             <Route path="/" component={Home} exact />
           </Switch>
