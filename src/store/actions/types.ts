@@ -2,6 +2,7 @@ export const GET_ARTICLES = "get_articles";
 export const ERROR_GLOBAL = "error_global";
 export const SUCCES_GLOBAL = "succes_global";
 export const CLEAR_NOTIFICATIONS = "clear_notifications";
+export const AUTH_USER = "auth_user";
 
 export interface ErrorGlobalDispatch {
   type: typeof ERROR_GLOBAL;
@@ -36,4 +37,10 @@ export interface ArticleT {
 export interface GetArticles {
   type: typeof GET_ARTICLES;
   payload: ArticleT;
+}
+
+// users actions 
+export interface AuthUser {
+  type: typeof AUTH_USER;
+  payload: string;
 }

@@ -1,8 +1,9 @@
+import { authUser } from "./users_actions";
 import {
   getArts,
-  errorAction,
-  succesAction,
-  clearNotificationAction,
+  errorNotificationGlobal,
+  succesNotificationGlobal,
+  clearNotificationGlobal,
 } from "./articleActions";
 import { RootStore } from "./../index";
 import { Dispatch } from "redux";
@@ -17,17 +18,34 @@ export const getArticles = (sort: any) => async (
   try {
     const arts = await axios.post("/api/articles/loadmore");
     dispatch(getArts(arts.data));
-    dispatch(succesAction("succes"));
-    dispatch(clearNotificationAction());
+    // dispatch(succesNotificationGlobal("succes"));
+    // dispatch(clearNotificationGlobal());
   } catch (e) {
-    dispatch(errorAction(e.message));
-    dispatch(clearNotificationAction());
+    dispatch(errorNotificationGlobal(e.message));
+    dispatch(clearNotificationGlobal());
   }
 };
 
-// Notifications
-export const errorGlobal = (message: string) => async (
+// users Dispatch Actions
+interface Values {
+  email: string;
+  password: string;
+}
+
+export const registerUser = ({ email, password }: Values) => async (
   dispatch: Dispatch<any>
 ) => {
-  dispatch(errorAction);
+  try {
+    const requestUser = await axios.post("/api/users/register", {
+      email,
+      password,
+    });
+    dispatch(succesNotificationGlobal("Hi, You have successfuly registered"));
+    dispatch(clearNotificationGlobal());
+    console.log(requestUser);
+    dispatch(authUser({ data: requestUser.data, auth: true }));
+  } catch (err) {
+    dispatch(errorNotificationGlobal(err.response.data.message));
+    dispatch(clearNotificationGlobal());
+  }
 };

@@ -9,18 +9,18 @@ export const getArts = (articles: ArticleT) => ({
 
 // Notifications
 // error
-export const errorAction = (message: string) => ({
+export const errorNotificationGlobal = (message: string) => ({
   type: ERROR_GLOBAL,
   payload: message,
 });
 
 // succes
-export const succesAction = (message: string) => ({
+export const succesNotificationGlobal = (message: string) => ({
   type: SUCCES_GLOBAL,
   payload: message,
 });
 
 // clear notifications
-export const clearNotificationAction = () => ({
+export const clearNotificationGlobal = () => ({
   type: CLEAR_NOTIFICATIONS,
 });
