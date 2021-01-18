@@ -9,26 +9,37 @@ import MainLayout from "./hoc/MainLayout";
 import { useDispatch, useSelector } from "react-redux";
 import { isAuthUser } from "./store/actions";
 import { RootStore } from "./store";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function Routes() {
+  const [loading, setLoading] = useState<boolean>(true);
   const dispatch = useDispatch();
-  const isUser = useSelector((state: RootStore) => state.users.auth);
+  const users = useSelector((state: RootStore) => state.users);
 
   useEffect(() => {
     dispatch(isAuthUser());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (users && users.auth !== null) {
+      setLoading(false);
+    }
+  }, [users]);
 
   return (
     <BrowserRouter>
       <MainLayout>
         <Header />
         <Grid item container>
-          <Switch>
-            <Route path="/auth" component={Auth} />
-            <Route path="/contact" component={Contact} />
-            <Route path="/" component={Home} exact />
-          </Switch>
+          {!loading ? (
+            <Switch>
+              <Route path="/auth" component={Auth} />
+              <Route path="/contact" component={Contact} />
+              <Route path="/" component={Home} exact />
+            </Switch>
+          ) : (
+            "Loading"
+          )}
           <GoogleFontLoader
             fonts={[
               {
