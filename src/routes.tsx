@@ -6,8 +6,19 @@ import Home from "./components/Home";
 import Contact from "./components/Contact";
 import Header from "./components/Navigation/Header";
 import MainLayout from "./hoc/MainLayout";
+import { useDispatch, useSelector } from "react-redux";
+import { isAuthUser } from "./store/actions";
+import { RootStore } from "./store";
+import { useEffect } from "react";
 
 function Routes() {
+  const dispatch = useDispatch();
+  const isUser = useSelector((state: RootStore) => state.users.auth);
+
+  useEffect(() => {
+    dispatch(isAuthUser());
+  }, [dispatch]);
+
   return (
     <BrowserRouter>
       <MainLayout>

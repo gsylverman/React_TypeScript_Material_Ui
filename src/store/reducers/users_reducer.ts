@@ -9,7 +9,6 @@ const INITIAL_USER_STATE = {
 };
 
 export default function usersReducer(state = INITIAL_USER_STATE, action: any) {
-  console.log(action.payload);
   switch (action.type) {
     case AUTH_USER:
       return {
