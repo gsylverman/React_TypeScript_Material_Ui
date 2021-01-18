@@ -52,8 +52,8 @@ const Auth: React.FC<AuthProps> = (props) => {
 
   return (
     <Grid container item>
-      <Grid container item xs={3} />
-      <Grid item xs={6}>
+      <Grid container item md={4} xs={1} />
+      <Grid item xs={10} md={4}>
         <h1>{register ? "Register" : "Login"}</h1>
         <form onSubmit={formik.handleSubmit} noValidate autoComplete="off">
           <TextField
@@ -98,7 +98,7 @@ const Auth: React.FC<AuthProps> = (props) => {
           </div>
         </form>
       </Grid>
-      <Grid container item xs={3} />
+      <Grid container item xs={1} md={4} />
     </Grid>
   );
 };
