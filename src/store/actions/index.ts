@@ -26,7 +26,8 @@ export const getArticles = (sort: any) => async (
   }
 };
 
-// users Dispatch Actions
+// users **************************
+
 interface Values {
   email: string;
   password: string;
@@ -41,6 +42,24 @@ export const registerUser = ({ email, password }: Values) => async (
       password,
     });
     dispatch(succesNotificationGlobal("Hi, You have successfuly registered"));
+    dispatch(clearNotificationGlobal());
+    console.log(requestUser);
+    dispatch(authUser({ data: requestUser.data, auth: true }));
+  } catch (err) {
+    dispatch(errorNotificationGlobal(err.response.data.message));
+    dispatch(clearNotificationGlobal());
+  }
+};
+
+export const signInUser = ({ email, password }: Values) => async (
+  dispatch: Dispatch<any>
+) => {
+  try {
+    const requestUser = await axios.post("/api/users/signin", {
+      email,
+      password,
+    });
+    dispatch(succesNotificationGlobal("Hi, You have successfuly logged in"));
     dispatch(clearNotificationGlobal());
     console.log(requestUser);
     dispatch(authUser({ data: requestUser.data, auth: true }));

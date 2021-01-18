@@ -3,7 +3,7 @@ import * as Yup from "yup";
 import { TextField, Grid, Button } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { registerUser } from "../../store/actions";
+import { registerUser, signInUser } from "../../store/actions";
 import { RootStore } from "../../store";
 import { RouteComponentProps } from "react-router-dom";
 
@@ -48,6 +48,8 @@ const Auth: React.FC<AuthProps> = (props) => {
   const handleSubmit = (values: Values) => {
     if (register) {
       dispatch(registerUser(values));
+    } else {
+      dispatch(signInUser(values));
     }
   };
 
@@ -100,7 +102,6 @@ const Auth: React.FC<AuthProps> = (props) => {
               onClick={() => setRegister(!register)}
               fullWidth
               variant="contained"
-              color="primary"
               size="large"
             >
               Whant to {register ? "Login" : "Register"}
