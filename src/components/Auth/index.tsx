@@ -3,7 +3,7 @@ import * as Yup from "yup";
 import { TextField, Grid, Button } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { registerUser, signInUser } from "../../store/actions";
+import { registerUser, signInUser } from "../../store/actions/users_actions";
 import { RootStore } from "../../store";
 import { RouteComponentProps } from "react-router-dom";
 

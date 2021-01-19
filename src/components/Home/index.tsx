@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootStore } from "../../store";
 import ArticleCard from "../../utils/ArticleCard";
 import { useEffect } from "react";
-import { getArticles } from "../../store/actions";
+import { getArticles } from "../../store/actions/articleActions";
 import { ArticleT, GetArticles } from "../../store/actions/types";
 
 export interface HomeProps {}

@@ -4,6 +4,7 @@ export const SUCCES_GLOBAL = "succes_global";
 export const CLEAR_NOTIFICATIONS = "clear_notifications";
 export const AUTH_USER = "auth_user";
 export const SIGN_OUT = "sign_out";
+export const SITE_LAYOUT = "site_layout";
 
 export interface ErrorGlobalDispatch {
   type: typeof ERROR_GLOBAL;
@@ -43,5 +44,11 @@ export interface GetArticles {
 // users actions
 export interface AuthUser {
   type: typeof AUTH_USER;
+  payload: string;
+}
+
+// layout
+export interface SiteLayoutAct {
+  type: typeof SITE_LAYOUT;
   payload: string;
 }

@@ -1,84 +1,52 @@
-import { SIGN_OUT } from "./types";
-import { getAuthHeaders, removeTokenCookie } from "./../../utils/tools";
-import { authUser } from "./users_actions";
 import {
-  getArts,
-  errorNotificationGlobal,
-  succesNotificationGlobal,
-  clearNotificationGlobal,
-} from "./articleActions";
-import { RootStore } from "./../index";
-import { Dispatch } from "redux";
-import axios from "axios";
+  AUTH_USER,
+  SIGN_OUT,
+  SITE_LAYOUT,
+  ERROR_GLOBAL,
+  SUCCES_GLOBAL,
+  CLEAR_NOTIFICATIONS,
+  ArticleT,
+  GET_ARTICLES,
+} from "./types";
 
-axios.defaults.headers.post["Content-Type"] = "application/json";
+// Article actions
+export const getArts = (articles: ArticleT) => ({
+  type: GET_ARTICLES,
+  payload: articles,
+});
 
-export const getArticles = (sort: any) => async (
-  dispatch: Dispatch<any>,
-  getState: RootStore
-) => {
-  try {
-    const arts = await axios.post("/api/articles/loadmore");
-    dispatch(getArts(arts.data));
-    // dispatch(succesNotificationGlobal("succes"));
-    // dispatch(clearNotificationGlobal());
-  } catch (e) {
-    dispatch(errorNotificationGlobal(e.message));
-    dispatch(clearNotificationGlobal());
-  }
-};
+// Notifications
+// error
+export const errorNotificationGlobal = (message: string) => ({
+  type: ERROR_GLOBAL,
+  payload: message,
+});
 
-// users **************************
+// succes
+export const succesNotificationGlobal = (message: string) => ({
+  type: SUCCES_GLOBAL,
+  payload: message,
+});
 
-interface Values {
-  email: string;
-  password: string;
-}
+// clear notifications
+export const clearNotificationGlobal = () => ({
+  type: CLEAR_NOTIFICATIONS,
+});
 
-export const registerUser = ({ email, password }: Values) => async (
-  dispatch: Dispatch<any>
-) => {
-  try {
-    const requestUser = await axios.post("/api/users/register", {
-      email,
-      password,
-    });
-    dispatch(succesNotificationGlobal("Hi, You have successfuly registered"));
-    dispatch(clearNotificationGlobal());
-    dispatch(authUser({ data: requestUser.data, auth: true }));
-  } catch (err) {
-    dispatch(errorNotificationGlobal(err.response.data.message));
-    dispatch(clearNotificationGlobal());
-  }
-};
+//users
 
-export const signInUser = ({ email, password }: Values) => async (
-  dispatch: Dispatch<any>
-) => {
-  try {
-    const requestUser = await axios.post("/api/users/signin", {
-      email,
-      password,
-    });
-    dispatch(succesNotificationGlobal("Hi, You have successfuly logged in"));
-    dispatch(clearNotificationGlobal());
-    dispatch(authUser({ data: requestUser.data, auth: true }));
-  } catch (err) {
-    dispatch(errorNotificationGlobal(err.response.data.message));
-    dispatch(clearNotificationGlobal());
-  }
-};
+export const authUser = (data: any) => ({
+  type: AUTH_USER,
+  payload: data,
+});
 
-export const isAuthUser = () => async (dispatch: Dispatch<any>) => {
-  try {
-    const requestUser = await axios.get("/api/users/isauth", getAuthHeaders);
-    dispatch(authUser({ data: requestUser.data, auth: true }));
-  } catch (err) {
-    dispatch(authUser({ data: {}, auth: false }));
-  }
-};
+export const logOutUser = () => ({
+  type: SIGN_OUT,
+});
 
-export const signOut = () => async (dispatch: Dispatch<any>) => {
-  removeTokenCookie();
-  dispatch({ type: SIGN_OUT });
-};
+//site
+
+export const siteLayout = (layout: string) => ({
+  type: SITE_LAYOUT,
+  payload: layout,
+});

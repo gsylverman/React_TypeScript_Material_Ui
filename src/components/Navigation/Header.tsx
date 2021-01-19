@@ -1,5 +1,5 @@
 import { RouteComponentProps, withRouter } from "react-router-dom";
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import SideDrawer from "./SideDrawer";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -7,7 +7,8 @@ import { AppBar, IconButton, makeStyles } from "@material-ui/core";
 import Toolbar from "@material-ui/core/Toolbar";
 import { Typography } from "@material-ui/core";
 import { MenuItem } from "@material-ui/core";
-import { signOut } from "../../store/actions";
+import { signOut } from "../../store/actions/users_actions";
+import { setLayout } from "../../store/actions/siteActions";
 
 export interface HeaderProps {
   location: RouteComponentProps["location"];
@@ -25,6 +26,13 @@ const Header: React.FC<HeaderProps> = (props) => {
   const classes = useStyles();
   const [sideDrawerStatus, setSideDrawerStatus] = React.useState(false);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const layout = props.location.pathname.includes("dashboard")
+      ? "admin"
+      : "user";
+    dispatch(setLayout(layout));
+  }, [props.location.pathname, dispatch]);
 
   const signOutUser = () => {
     dispatch(signOut());
