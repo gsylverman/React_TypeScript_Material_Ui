@@ -3,9 +3,11 @@ import GoogleFontLoader from "react-google-font-loader";
 import { Grid } from "@material-ui/core";
 import Auth from "./components/Auth";
 import Home from "./components/Home";
+import ErrorPage from "./components/ErrorPage";
 import Contact from "./components/Contact";
 import Header from "./components/Navigation/Header";
 import MainLayout from "./hoc/MainLayout";
+import Loader from "./utils/loader";
 import { useDispatch, useSelector } from "react-redux";
 import { isAuthUser } from "./store/actions";
 import { RootStore } from "./store";
@@ -36,9 +38,10 @@ function Routes() {
               <Route path="/auth" component={Auth} />
               <Route path="/contact" component={Contact} />
               <Route path="/" component={Home} exact />
+              <Route path="/" component={ErrorPage} />
             </Switch>
           ) : (
-            "Loading"
+            <Loader />
           )}
           <GoogleFontLoader
             fonts={[

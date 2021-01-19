@@ -1,25 +1,37 @@
-import { withRouter } from "react-router-dom";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 import React from "react";
+import { useDispatch } from "react-redux";
 import SideDrawer from "./SideDrawer";
 import MenuIcon from "@material-ui/icons/Menu";
 import { AppBar, IconButton, makeStyles } from "@material-ui/core";
 import Toolbar from "@material-ui/core/Toolbar";
 import { Typography } from "@material-ui/core";
 import { MenuItem } from "@material-ui/core";
+import { signOut } from "../../store/actions";
 
-export interface HeaderProps {}
+export interface HeaderProps {
+  location: RouteComponentProps["location"];
+  history: RouteComponentProps["history"];
+  match: RouteComponentProps["match"];
+}
 
 const useStyles = makeStyles((theme) => ({
   title: {
     flex: 1,
-  }
+  },
 }));
 
 const Header: React.FC<HeaderProps> = (props) => {
   const classes = useStyles();
   const [sideDrawerStatus, setSideDrawerStatus] = React.useState(false);
+  const dispatch = useDispatch();
 
-  const toggleDrawer = (open: boolean) => (
+  const signOutUser = () => {
+    dispatch(signOut());
+    props.history.push("/");
+  };
+
+  const toggleDrawer = (value: boolean) => (
     event: React.KeyboardEvent | React.MouseEvent
   ) => {
     if (
@@ -29,8 +41,7 @@ const Header: React.FC<HeaderProps> = (props) => {
     ) {
       return;
     }
-
-    setSideDrawerStatus(open);
+    setSideDrawerStatus(value);
   };
 
   return (
@@ -51,6 +62,7 @@ const Header: React.FC<HeaderProps> = (props) => {
         <SideDrawer
           toggleDrawer={toggleDrawer}
           sideDrawerStatus={sideDrawerStatus}
+          signOut={signOutUser}
         />
       </nav>
     </>

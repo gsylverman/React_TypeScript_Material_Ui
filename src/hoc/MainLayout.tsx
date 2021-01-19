@@ -10,6 +10,7 @@ export interface MainLayoutProps {}
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   const notifications = useSelector((state: RootStore) => state.notifications);
+
   useEffect(() => {
     if (notifications && notifications.error) {
       tools.showToast("ERROR", notifications.msg);

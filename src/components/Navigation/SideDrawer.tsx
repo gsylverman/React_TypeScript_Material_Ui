@@ -29,11 +29,13 @@ interface TemporatyDrawerProps {
     open: boolean
   ) => (event: React.KeyboardEvent | React.MouseEvent) => void;
   sideDrawerStatus: boolean;
+  signOut(): void;
 }
 
 export const TemporaryDrawer: React.FC<TemporatyDrawerProps> = ({
   toggleDrawer,
   sideDrawerStatus,
+  signOut,
 }) => {
   const classes = useStyles();
   return (
@@ -87,9 +89,10 @@ export const TemporaryDrawer: React.FC<TemporatyDrawerProps> = ({
         </ListItem>
         <ListItem
           button
-          component={RouterLink}
-          to="/logout"
-          onClick={toggleDrawer(false)}
+          onClick={(e) => {
+            toggleDrawer(false)(e);
+            signOut();
+          }}
         >
           <ListItemIcon>
             <VpnKeyIcon />

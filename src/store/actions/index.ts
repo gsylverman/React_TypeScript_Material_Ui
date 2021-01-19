@@ -1,3 +1,4 @@
+import { SIGN_OUT } from "./types";
 import { getAuthHeaders, removeTokenCookie } from "./../../utils/tools";
 import { authUser } from "./users_actions";
 import {
@@ -75,4 +76,9 @@ export const isAuthUser = () => async (dispatch: Dispatch<any>) => {
   } catch (err) {
     dispatch(authUser({ data: {}, auth: false }));
   }
+};
+
+export const signOut = () => async (dispatch: Dispatch<any>) => {
+  removeTokenCookie();
+  dispatch({ type: SIGN_OUT });
 };

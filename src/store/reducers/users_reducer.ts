@@ -1,4 +1,5 @@
-import { AUTH_USER } from "./../actions/types";
+import { AUTH_USER, SIGN_OUT } from "./../actions/types";
+
 const INITIAL_USER_STATE = {
   data: {
     email: null,
@@ -16,6 +17,8 @@ export default function usersReducer(state = INITIAL_USER_STATE, action: any) {
         data: { ...state.data, ...action.payload.data },
         auth: action.payload.auth,
       };
+    case SIGN_OUT:
+      return { ...state, data: { ...INITIAL_USER_STATE.data }, auth: false };
     default:
       return state;
   }

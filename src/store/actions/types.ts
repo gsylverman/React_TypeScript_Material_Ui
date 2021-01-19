@@ -3,6 +3,7 @@ export const ERROR_GLOBAL = "error_global";
 export const SUCCES_GLOBAL = "succes_global";
 export const CLEAR_NOTIFICATIONS = "clear_notifications";
 export const AUTH_USER = "auth_user";
+export const SIGN_OUT = "sign_out";
 
 export interface ErrorGlobalDispatch {
   type: typeof ERROR_GLOBAL;
@@ -39,7 +40,7 @@ export interface GetArticles {
   payload: ArticleT;
 }
 
-// users actions 
+// users actions
 export interface AuthUser {
   type: typeof AUTH_USER;
   payload: string;
