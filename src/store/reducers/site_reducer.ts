@@ -1,6 +1,17 @@
 import { SITE_LAYOUT } from "./../actions/types";
 
-export default function siteReducer(state = {}, action: any) {
+type SiteState =
+  | {
+      layout: string;
+    }
+  | {};
+
+const initialSiteState = {};
+
+export default function siteReducer(
+  state: SiteState = initialSiteState,
+  action: any
+) {
   switch (action.type) {
     case SITE_LAYOUT:
       return {
