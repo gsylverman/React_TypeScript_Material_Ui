@@ -31,14 +31,15 @@ const Auth: React.FC<AuthProps> = (props) => {
   const [register, setRegister] = useState<boolean>(false);
   const dispatch = useDispatch();
   const notifications = useSelector((state: RootStore) => state.notifications);
+
   useEffect(() => {
     if (notifications && notifications.succes) {
-      props.history.push("/");
+      props.history.push("/dashboard");
     }
   }, [notifications, props.history]);
 
   const formik = useFormik({
-    initialValues: { email: "", password: "" },
+    initialValues: { email: "test@mail.com", password: "1234" },
     validationSchema: SignupSchema,
     onSubmit: (values, { resetForm }) => {
       handleSubmit(values);

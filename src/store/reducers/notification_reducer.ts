@@ -36,6 +36,7 @@ export default function notificationReducer(
       };
     case CLEAR_NOTIFICATIONS:
       return {
+        ...state,
         ...initialNotification,
       };
     default:

@@ -61,5 +61,7 @@ export const isAuthUser = () => async (dispatch: Dispatch<any>) => {
 
 export const signOut = () => async (dispatch: Dispatch<any>) => {
   removeTokenCookie();
+  await dispatch(succesNotificationGlobal("Bye"));
+  dispatch(clearNotificationGlobal());
   dispatch({ type: SIGN_OUT });
 };
