@@ -12,7 +12,6 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   const notifications = useSelector((state: RootStore) => state.notifications);
 
   useEffect(() => {
-    console.log(notifications);
     if (notifications && notifications.error) {
       tools.showToast("ERROR", notifications.msg);
     }

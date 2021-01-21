@@ -1,5 +1,9 @@
 import { SIGN_OUT } from "./types";
-import { getAuthHeaders, removeTokenCookie } from "./../../utils/tools";
+import {
+  getAuthHeaders,
+  removeTokenCookie,
+  getTokenCookie,
+} from "./../../utils/tools";
 import { authUser } from "../actions";
 import {
   errorNotificationGlobal,
@@ -8,6 +12,7 @@ import {
 } from "../actions";
 import { Dispatch } from "redux";
 import axios from "axios";
+import { Error } from "@material-ui/icons";
 
 // users **************************
 
@@ -52,7 +57,10 @@ export const signInUser = ({ email, password }: Values) => async (
 
 export const isAuthUser = () => async (dispatch: Dispatch<any>) => {
   try {
-    const requestUser = await axios.get("/api/users/isauth", getAuthHeaders);
+    if (!getTokenCookie()) {
+      throw new (Error as any)("");
+    }
+    const requestUser = await axios.get("/api/users/isauth", getAuthHeaders());
     dispatch(authUser({ data: requestUser.data, auth: true }));
   } catch (err) {
     dispatch(authUser({ data: {}, auth: false }));

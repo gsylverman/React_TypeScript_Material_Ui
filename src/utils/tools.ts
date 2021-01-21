@@ -21,6 +21,8 @@ export const showToast = (type: string, message: string) => {
 
 export const getTokenCookie = () => cookie.load("x-access-token");
 export const removeTokenCookie = () => cookie.remove("x-access-token");
-export const getAuthHeaders = {
-  headers: { "x-access-token": getTokenCookie() },
+export const getAuthHeaders = () => {
+  return {
+    headers: { "x-access-token": getTokenCookie() },
+  };
 };
