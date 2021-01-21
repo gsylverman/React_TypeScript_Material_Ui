@@ -30,12 +30,14 @@ interface TemporatyDrawerProps {
   ) => (event: React.KeyboardEvent | React.MouseEvent) => void;
   sideDrawerStatus: boolean;
   signOut(): void;
+  users: any;
 }
 
 export const TemporaryDrawer: React.FC<TemporatyDrawerProps> = ({
   toggleDrawer,
   sideDrawerStatus,
   signOut,
+  users,
 }) => {
   const classes = useStyles();
   return (
@@ -76,44 +78,51 @@ export const TemporaryDrawer: React.FC<TemporatyDrawerProps> = ({
           </ListItemIcon>
           <ListItemText primary="Contact" />
         </ListItem>
-        <ListItem
-          button
-          component={RouterLink}
-          to="/auth"
-          onClick={toggleDrawer(false)}
-        >
-          <ListItemIcon>
-            <VpnKeyIcon />
-          </ListItemIcon>
-          <ListItemText primary="sign in" />
-        </ListItem>
-        <ListItem
-          button
-          onClick={(e) => {
-            toggleDrawer(false)(e);
-            signOut();
-          }}
-        >
-          <ListItemIcon>
-            <VpnKeyIcon />
-          </ListItemIcon>
-          <ListItemText primary="sign out" />
-        </ListItem>
+        {!users.auth ? (
+          <ListItem
+            button
+            component={RouterLink}
+            to="/auth"
+            onClick={toggleDrawer(false)}
+          >
+            <ListItemIcon>
+              <VpnKeyIcon />
+            </ListItemIcon>
+            <ListItemText primary="sign in" />
+          </ListItem>
+        ) : (
+          <ListItem
+            button
+            onClick={(e) => {
+              toggleDrawer(false)(e);
+              signOut();
+            }}
+          >
+            <ListItemIcon>
+              <VpnKeyIcon />
+            </ListItemIcon>
+            <ListItemText primary="sign out" />
+          </ListItem>
+        )}
       </List>
-      <Divider />
-      <List>
-        <ListItem
-          button
-          component={RouterLink}
-          to="/dashboard"
-          onClick={toggleDrawer(false)}
-        >
-          <ListItemIcon>
-            <Dashboard />
-          </ListItemIcon>
-          <ListItemText primary="Dashboard" />
-        </ListItem>
-      </List>
+      {users.auth && (
+        <>
+          <Divider />
+          <List>
+            <ListItem
+              button
+              component={RouterLink}
+              to="/dashboard"
+              onClick={toggleDrawer(false)}
+            >
+              <ListItemIcon>
+                <Dashboard />
+              </ListItemIcon>
+              <ListItemText primary="Dashboard" />
+            </ListItem>
+          </List>
+        </>
+      )}
     </Drawer>
   );
 };

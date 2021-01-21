@@ -41,9 +41,9 @@ export const signInUser = ({ email, password }: Values) => async (
       email,
       password,
     });
+    dispatch(authUser({ data: requestUser.data, auth: true }));
     dispatch(succesNotificationGlobal("Hi, You have successfuly logged in"));
     dispatch(clearNotificationGlobal());
-    dispatch(authUser({ data: requestUser.data, auth: true }));
   } catch (err) {
     dispatch(errorNotificationGlobal(err.response.data.message));
     dispatch(clearNotificationGlobal());

@@ -1,6 +1,6 @@
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SideDrawer from "./SideDrawer";
 import MenuIcon from "@material-ui/icons/Menu";
 import { AppBar, IconButton, makeStyles } from "@material-ui/core";
@@ -9,6 +9,7 @@ import { Typography } from "@material-ui/core";
 import { MenuItem } from "@material-ui/core";
 import { signOut } from "../../store/actions/users_actions";
 import { setLayout } from "../../store/actions/siteActions";
+import { RootStore } from "../../store";
 
 export interface HeaderProps {
   location: RouteComponentProps["location"];
@@ -25,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
 const Header: React.FC<HeaderProps> = (props) => {
   const classes = useStyles();
   const [sideDrawerStatus, setSideDrawerStatus] = React.useState(false);
+  const users = useSelector((state: RootStore) => state.users);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -71,6 +73,7 @@ const Header: React.FC<HeaderProps> = (props) => {
           toggleDrawer={toggleDrawer}
           sideDrawerStatus={sideDrawerStatus}
           signOut={signOutUser}
+          users={users}
         />
       </nav>
     </>
