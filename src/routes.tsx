@@ -17,6 +17,7 @@ import MainLayout from "./hoc/MainLayout";
 import authGuard from "./hoc/authGuard";
 import Loader from "./utils/loader";
 import Articles from "./components/Dashboard/Articles";
+import Article from "./components/articles/article";
 
 function Routes() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -40,6 +41,7 @@ function Routes() {
         <Grid item container>
           {!loading ? (
             <Switch>
+              <Route path="/article/:id" component={Article} />
               <Route
                 path="/dashboard/articles"
                 component={authGuard(Articles)}
