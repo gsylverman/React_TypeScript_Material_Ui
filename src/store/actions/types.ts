@@ -1,5 +1,6 @@
 export const GET_ARTICLES = "get_articles";
 export const GET_ARTICLE = "get_article";
+export const CLEAR_ARTICLE = "clear_article";
 export const ERROR_GLOBAL = "error_global";
 export const SUCCES_GLOBAL = "succes_global";
 export const CLEAR_NOTIFICATIONS = "clear_notifications";
@@ -35,6 +36,7 @@ export interface ArticleT {
   status: string;
   title: string;
   _id: string;
+  actors: Array<any>;
 }
 
 export interface GetArticles {
@@ -47,7 +49,11 @@ export interface GetArticle {
   payload: ArticleT;
 }
 
-export type ArticleAction = GetArticle | GetArticles;
+export interface ClearArticle {
+  type: typeof CLEAR_ARTICLE;
+}
+
+export type ArticleAction = GetArticle | GetArticles | ClearArticle;
 
 // users actions
 export interface AuthUser {

@@ -8,6 +8,7 @@ import {
   ArticleT,
   GET_ARTICLES,
   GET_ARTICLE,
+  CLEAR_ARTICLE,
 } from "./types";
 
 // Article actions
@@ -16,9 +17,13 @@ export const getArts = (articles: ArticleT) => ({
   payload: articles,
 });
 
-export const currentArticle = (article: ArticleT) => ({
+export const setCurrentArticle = (article: ArticleT) => ({
   type: GET_ARTICLE,
   payload: article,
+});
+
+export const clearCurrentArticle = () => ({
+  type: CLEAR_ARTICLE,
 });
 
 // Notifications

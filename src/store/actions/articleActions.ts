@@ -1,8 +1,9 @@
 import {
   getArts,
-  currentArticle,
+  setCurrentArticle,
   errorNotificationGlobal,
   clearNotificationGlobal,
+  clearCurrentArticle,
 } from "../actions";
 import { RootStore } from "./../index";
 import { Dispatch } from "redux";
@@ -31,9 +32,16 @@ export const getArticle = (id: string) => async (
 ) => {
   try {
     const request = await axios.get(`/api/articles/get_byid/${id}`);
-    dispatch(currentArticle(request.data[0]));
+    dispatch(setCurrentArticle(request.data[0]));
   } catch (e) {
     dispatch(errorNotificationGlobal(e.message));
     dispatch(clearNotificationGlobal());
   }
+};
+
+export const clearArticle = () => async (
+  dispatch: Dispatch<any>,
+  getState: RootStore
+) => {
+  dispatch(clearCurrentArticle());
 };

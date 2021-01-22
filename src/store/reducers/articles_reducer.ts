@@ -1,3 +1,4 @@
+import { CLEAR_ARTICLE } from "./../actions/types";
 import { RootStore } from "./../index";
 import { GET_ARTICLES, ArticleAction, GET_ARTICLE } from "../actions/types";
 
@@ -10,6 +11,11 @@ export default function articleReducer(
       return {
         ...state,
         articles: action.payload,
+      };
+    case CLEAR_ARTICLE:
+      return {
+        ...state,
+        current: null,
       };
     case GET_ARTICLE:
       return {

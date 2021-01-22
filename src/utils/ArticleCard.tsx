@@ -8,8 +8,8 @@ import {
   Typography,
   Button,
 } from "@material-ui/core";
+import { ArticleT } from "./../store/actions/types";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import { ArticleT } from "../store/actions/types";
 
 export interface ArticleCardProps {
   article: ArticleT;
