@@ -7,12 +7,18 @@ import {
   CLEAR_NOTIFICATIONS,
   ArticleT,
   GET_ARTICLES,
+  GET_ARTICLE,
 } from "./types";
 
 // Article actions
 export const getArts = (articles: ArticleT) => ({
   type: GET_ARTICLES,
   payload: articles,
+});
+
+export const currentArticle = (article: ArticleT) => ({
+  type: GET_ARTICLE,
+  payload: article,
 });
 
 // Notifications

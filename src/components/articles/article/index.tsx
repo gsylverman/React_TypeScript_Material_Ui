@@ -3,32 +3,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import ArticleCard from "../../../utils/ArticleCard";
 import { ArticleT } from "../../../store/actions/types";
+import { getArticle } from "../../../store/actions/articleActions";
 
 export interface ArticleProps {
   match: any;
 }
 
 const Article: React.FC<ArticleProps> = (props) => {
-  const [currentArticle, setCurrentArticle] = useState<ArticleT>({
-    content: "",
-    date: "",
-    director: "",
-    excerpt: "",
-    score: 0,
-    status: "",
-    title: "",
-    _id: "",
-  });
-  const { articles } = useSelector((state: RootStore) => state.articles);
+  const { current } = useSelector((state: RootStore) => state.articles);
   const dispatch = useDispatch();
+  console.log(current);
+
   useEffect(() => {
     const id = props.match.params.id;
-    const current = articles.find((article: ArticleT) => article._id === id);
-    setCurrentArticle(current);
-    console.log(currentArticle);
+    dispatch(getArticle(id));
   }, [props.match.params]);
 
-  return <ArticleCard article={currentArticle} />;
+  return <>{current && <ArticleCard article={current} />}</>;
 };
 
 export default Article;

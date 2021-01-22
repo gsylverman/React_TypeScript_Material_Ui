@@ -1,4 +1,5 @@
 export const GET_ARTICLES = "get_articles";
+export const GET_ARTICLE = "get_article";
 export const ERROR_GLOBAL = "error_global";
 export const SUCCES_GLOBAL = "succes_global";
 export const CLEAR_NOTIFICATIONS = "clear_notifications";
@@ -40,6 +41,13 @@ export interface GetArticles {
   type: typeof GET_ARTICLES;
   payload: ArticleT;
 }
+
+export interface GetArticle {
+  type: typeof GET_ARTICLE;
+  payload: ArticleT;
+}
+
+export type ArticleAction = GetArticle | GetArticles;
 
 // users actions
 export interface AuthUser {

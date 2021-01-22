@@ -28,7 +28,7 @@ const Home: React.FC<HomeProps> = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!Object.keys(articles).length && !articles.articles) {
+    if (!articles.articles) {
       dispatch(getArticles(sort));
     }
   }, [dispatch, articles, sort]);
@@ -38,7 +38,7 @@ const Home: React.FC<HomeProps> = () => {
       <Grid container>
         <Grid item container sm={1} lg={2} />
         <Grid item container spacing={2} sm={10} lg={8}>
-          {Object.keys(articles).length &&
+          {articles.articles &&
             articles.articles.map((article: ArticleT, index: number) => (
               <Grid
                 key={article._id}

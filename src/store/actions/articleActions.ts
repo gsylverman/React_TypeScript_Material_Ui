@@ -1,5 +1,6 @@
 import {
   getArts,
+  currentArticle,
   errorNotificationGlobal,
   clearNotificationGlobal,
 } from "../actions";
@@ -18,6 +19,19 @@ export const getArticles = (sort: any) => async (
     dispatch(getArts(arts.data));
     // dispatch(succesNotificationGlobal("succes"));
     // dispatch(clearNotificationGlobal());
+  } catch (e) {
+    dispatch(errorNotificationGlobal(e.message));
+    dispatch(clearNotificationGlobal());
+  }
+};
+
+export const getArticle = (id: string) => async (
+  dispatch: Dispatch<any>,
+  getState: RootStore
+) => {
+  try {
+    const request = await axios.get(`/api/articles/get_byid/${id}`);
+    dispatch(currentArticle(request.data[0]));
   } catch (e) {
     dispatch(errorNotificationGlobal(e.message));
     dispatch(clearNotificationGlobal());
